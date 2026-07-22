@@ -1,1 +1,39 @@
-{% extends 'base.html' %}{% block content %}<form method="POST"><div class="field"><label>country_id</label><input name="country_id"/></div><div class="field"><label>cat_id</label><input name="cat_id"/></div><div class="field"><label>pic</label><input name="pic"/></div><div class="actions"><input type="submit"/></div></form>{% for x in photos %}{{x["country_id"] }}{% endfor %}{% endblock %}{% block liens %}<a href="/">bienvenue</a><a href="/add_one_photo"> add one photo</a>{% endblock %}
+{% extends 'base.html' %}{% block content %}
+
+<form enctype="multipart/form-data" method="POST"><div class="field"><label>country_id</label>
+<select name="country_id"/>
+{% for x in country %}
+<option value="{{ x["id"] }}">{{ x["name"] }}</option>
+{% endfor %}
+</select>
+
+<div class="field"><label>cat_id</label>
+
+<select name="cat_id">
+{% for x in cat %}
+<option value="{{ x["id"] }}">{{ x["name"] }}</option>
+{% endfor %}
+</select>
+
+</div><div class="field"><label>pic</label><input type="file" name="pic"/></div><div class="actions"><input type="submit"/></div></form>
+
+<div class="row row-cols-1 row-cols-md-2 g-4">
+
+
+{% for x in photos %}
+  <div class="col">
+    <div class="card">
+      <img src="/static/photos/{{ x["pic"] }}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endfor %}
+</div>
+
+{% endblock %}{% block liens %}<a href="/">bienvenue</a><a href="/add_one_photo"> add one photo</a>{% endblock %}

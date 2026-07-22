@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import os
 from yourappdb import query_db, get_db
 from flask import g
 
@@ -65,16 +66,25 @@ def add_one_cat():
 
 @app.route("/add_one_photo", methods=["GET","POST"])
 def add_one_photo():
+    country = query_db('select * from country')
+    cat = query_db('select * from cat')
 
     if request.method == 'POST':
 
         the_username = "anonyme"
-        one_user = query_db("insert into photo (country_id,cat_id,pic) values (:country_id,:cat_id,:pic)",request.form)
+        print(request.form)
+        print(request.files)
+        uploaded_file = request.files['pic']
+        yeah={"country_id": request.form["country_id"], "cat_id":request.form["cat_id"],"pic": uploaded_file.filename}
+        if uploaded_file.filename != '':
+            uploaded_file.save(os.path.join('static/photos', uploaded_file.filename))
+        one_user = query_db("insert into photo (country_id,cat_id,pic) values (:country_id,:cat_id,:pic)",yeah)
+
         user = query_db('select * from photo')
-        return render_template("photoform.html", photos=user, one_user=one_user, the_title="add new photo")
+        return render_template("photoform.html", country=country,cat=cat,photos=user, one_user=one_user, the_title="add new photo")
     user = query_db('select * from photo')
     one_user = query_db("select * from photo limit 1", one=True)
-    return render_template("photoform.html", photos=user, one_user=one_user, the_title="add new photo")
+    return render_template("photoform.html", country=country,cat=cat,photos=user, one_user=one_user, the_title="add new photo")
 
 @app.route("/add_one_songs", methods=["GET","POST"])
 def add_one_songs():
