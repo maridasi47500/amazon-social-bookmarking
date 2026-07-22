@@ -1,18 +1,18 @@
 #!/bin/bash
 export GITHUBUSERNAME="maridasi47500"
-mkdir -p "~/$1/templates" 
-mkdir -p "~/$1/static/css"
-touch "~/$1/templates/base.html" 
-touch "~/$1/templates/hey.html" 
+mkdir -p "/home/$USER/$1/templates" 
+mkdir -p "/home/$USER/$1/static/css"
+touch "/home/$USER/$1/templates/base.html" 
+touch "/home/$USER/$1/templates/hey.html" 
 echo "&1 $1 $2 $3 $4"
 pwd
 echo "git clone git@github.com:$GITHUBUSERNAME/$1.git"
 $(cd ~ && git clone "git@github.com:$GITHUBUSERNAME/$1.git")
-echo "__pycache__/\ndatabase.db" > "~/$1/.gitignore" 
+echo "__pycache__/\ndatabase.db" > "/home/$USER/$1/.gitignore" 
 echo "`cat <<EOF
 __pycache__/
 database.db
-EOF`" > "~/$1/.gitignore" 
+EOF`" > "/home/$USER/$1/.gitignore" 
 
 
 
@@ -22,10 +22,10 @@ mkdir -p ~/path/to/venv
 python3 -m venv ~/path/to/venv
 source ~/path/to/venv/bin/activate
 flask run
-EOF`" > "~/$1/commencer.sh" 
+EOF`" > "/home/$USER/$1/commencer.sh" 
 echo "====CHECK COMMENCER.SH ====\n"
-echo "~/$1/commencer.sh" 
-cat "~/$1/commencer.sh" 
+echo "/home/$USER/$1/commencer.sh" 
+cat "/home/$USER/$1/commencer.sh" 
 
 echo "====CREE BASE HTML ====\n"
 echo "`cat <<EOF
@@ -55,10 +55,10 @@ echo "`cat <<EOF
 
 </body>
 </html>
-EOF`" > "~/$1/templates/base.html" 
+EOF`" > "/home/$USER/$1/templates/base.html" 
 echo "====CHECK BASE  ====\n"
-echo "~/$1/templates/base.html" 
-cat "~/$1/templates/base.html" 
+echo "/home/$USER/$1/templates/base.html" 
+cat "/home/$USER/$1/templates/base.html" 
 
 
 echo "====CREE HEY HTML ====\n"
@@ -79,9 +79,9 @@ $3
 {% block liens %}
 <a href="/">welcome</a>
 {% endblock %}
-EOF`" > "~/$1/templates/hey.html" 
+EOF`" > "/home/$USER/$1/templates/hey.html" 
 echo "====CHECK HEY  ====\n"
-cat "~/$1/templates/hey.html" 
+cat "/home/$USER/$1/templates/hey.html" 
 echo "`cat <<EOF
 body {
 background:black;
@@ -90,7 +90,7 @@ color:white;
 a, a:visited, a:hover, a:link {
 color:white;
 }
-EOF`" > "~/$1/static/css/main.css" 
+EOF`" > "/home/$USER/$1/static/css/main.css" 
 echo "`cat <<EOF
 import sqlite3
 from flask import g
@@ -120,7 +120,7 @@ def query_db(query, args=(), one=False):
 
 
 
-EOF`" > "~/$1/yourappdb.py"
+EOF`" > "/home/$USER/$1/yourappdb.py"
 echo "`cat <<EOF
 from flask import Flask, render_template, request
 from yourappdb import query_db, get_db
@@ -148,7 +148,7 @@ def hello_world():
     one_user = query_db('select * from contacts where first_name = ?',
                 [the_username], one=True)
     return render_template("hey.html", users=user, one_user=one_user, the_title="my title")
-EOF`" > "~/$1/app.py"
+EOF`" > "/home/$USER/$1/app.py"
 echo "`cat <<EOF
 CREATE TABLE  IF NOT EXISTS contacts (
 	contact_id INTEGER PRIMARY KEY,
@@ -178,7 +178,7 @@ INSERT OR IGNORE INTO contacts (contact_id, first_name, last_name, email, phone)
 VALUES( '1', 'anonyme', 'noname', 'anonymous@email.fr', '+2653546434');
 INSERT OR IGNORE INTO contacts (contact_id, first_name, last_name, email, phone)
 VALUES( '2', 'anne onim', 'onim', 'anne.onim@email.com', '+86877779898');
-EOF`" > "~/$1/schema.sql"
+EOF`" > "/home/$USER/$1/schema.sql"
 pwd
 cp ~/list-repo/scaffold.py "/home/$USER/$1"
 cp ~/list-repo/hellopython.sh "/home/$USER/$1"

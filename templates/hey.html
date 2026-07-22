@@ -1,4 +1,17 @@
+{% extends 'base.html' %}
+
+{% block montitre %}
+debut de mes mots: pin your interest
+{% endblock %}
+{% block content %}
 <h1># amazon-social-bookmarking</h1>
-<p>choisis un truc qui n'est non quelqu'un (peute tre 1 amie seuelemnt) ou des trucs/objet/activites que tu aimes <input /></p>
-<p>choisis un reseau social pour le publier<input/></p>
-<a href="/add_one_user"> add one user</a><a href="/add_one_country"> add one country</a><a href="/add_one_cat"> add one cat</a><a href="/add_one_photo"> add one photo</a><a href="/add_one_songs"> add one songs</a><a href="/add_one_likes"> add one likes</a><a href="/add_one_likesongs"> add one likesongs</a><a href="/add_one_user"> add one user</a><a href="/add_one_country"> add one country</a><a href="/add_one_cat"> add one cat</a><a href="/add_one_photo"> add one photo</a><a href="/add_one_songs"> add one songs</a><a href="/add_one_likes"> add one likes</a><a href="/add_one_likesongs"> add one likesongs</a><a href="/add_one_user"> add one user</a><a href="/add_one_country"> add one country</a><a href="/add_one_cat"> add one cat</a><a href="/add_one_photo"> add one photo</a><a href="/add_one_songs"> add one songs</a><a href="/add_one_likes"> add one likes</a><a href="/add_one_likesongs"> add one likesongs</a>
+{% for x in users | reverse %}
+ <li>{{ x["first_name"]  }}</li>
+
+{% endfor %} 
+fin de mes mots : pin your interests, Pic or Sound !
+{% endblock %}
+{% block liens %}
+<a href="/">welcome</a>
+{% endblock %}
+<a href="/add_one_user"> add one user</a><a href="/add_one_country"> add one country</a><a href="/add_one_cat"> add one cat</a><a href="/add_one_photo"> add one photo</a><a href="/add_one_songs"> add one songs</a><a href="/add_one_likes"> add one likes</a><a href="/add_one_likesongs"> add one likesongs</a>
