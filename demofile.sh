@@ -1,4 +1,6 @@
 
+touch templates/base.html
+touch templates/hey.html
 mkdir templates 
 python3 scaffold.py user username email password phone country_id
 python3 scaffold.py country name
